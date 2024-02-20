@@ -1,0 +1,34 @@
+{% extends 'layout.html' %}
+
+{% block title %}Закладки{% endblock %}
+
+{% block body %}
+<!-- Контейнер для отображения закладок -->
+<div class="container mt-5 mb-5">
+  <!-- Заголовок страницы -->
+  <div class="row">
+    <h1 class="text-center mt-3 mb-3">
+      Закладки
+    </h1>
+  </div>
+  <!-- Ряд для отображения карточек блогов (колонок) -->
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for bookmark in bookmarks %}
+      <!-- Проверка, активен ли блог, связанный с закладкой -->
+      {% if bookmark.blog.is_active %}
+        <!-- Включение шаблона для отображения карточки блога -->
+        {% include 'card.html' with blog=bookmark.blog %}
+      {% endif %}
+    {% empty %}
+      <!-- Если закладок нет, выводим сообщение -->
+      </div>
+      <div class="row mt-5">
+        <p class="text-center">
+          Вы еще не добавили ни одного мероприятия в закладки.
+        </p>
+    {% endfor %}
+  </div>
+  <!-- Включение шаблона для отображения пагинации -->
+  {% include 'pagination.html' with blogs=bookmarks %}
+</div>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'layout.html' %}
+
+{% block title %}{{ query }} - Поиск{% endblock %}
+
+{% block body %}
+<div class="container mt-5 mb-5">
+  <div class="row">
+    <h3>Результаты поиска для "{{ query }}"</h3>
+    <!-- Заголовок, отображающий строку запроса -->
+  </div>
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for blog in blogs %}
+      {% include 'card.html' with blog=blog %}
+      <!-- Включение шаблона карточки для каждого блога в результате поиска -->
+    {% empty %}
+    <p class="mt-5">Данные не найдены !!!<p>
+    <!-- Сообщение, если результаты поиска отсутствуют -->
+    {% endfor %}
+  </div>
+  {% include 'pagination.html' with blogs=blogs %}
+  <!-- Включение шаблона пагинации для управления страницами результатов поиска -->
+</div>
+{% endblock %}
+

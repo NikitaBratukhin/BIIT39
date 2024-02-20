@@ -1,0 +1,33 @@
+{% extends 'layout.html' %}
+
+{% block title %}Вход - Аккаунты{% endblock %}
+
+{% block body %}
+<div class="container mt-5 mb-5">
+<form method="post" action="{% url 'accounts:login' %}">
+  {% csrf_token %}
+  <h1 class="text-center">
+    Вход
+  </h1>
+  <div class="mb-3">
+    <label for="username" class="form-label">
+      Имя пользователя
+    </label>
+    <input type="text" class="form-control" id="username" aria-describedby="usernameHelp" name="username" placeholder="Имя пользователя" required autofocus>
+  </div>
+  <div class="mb-3">
+    <label for="password" class="form-label">
+      Пароль
+    </label>
+    <input type="password" class="form-control" id="password" name="password" placeholder="Пароль" required>
+  </div>
+  <div>
+    <a href="#" class="float-end text-decoration-none">Забыли пароль?</a>
+  </div>
+  <button type="submit" class="btn btn-success w-100 mt-3">Войти</button>
+  <div class="mt-3">
+    <p>Нет аккаунта? <a href="{% url 'accounts:register' %}" class="text-decoration-none">Зарегистрироваться</a></p>
+  </div>
+</form>
+</div>
+{% endblock %}

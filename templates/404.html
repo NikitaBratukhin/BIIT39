@@ -1,0 +1,20 @@
+{% extends 'layout.html' %}
+{% block title %}Ошибка - 404{% endblock %}
+
+{% block body %}
+<!-- Контейнер для отображения страницы ошибки 404 -->
+<div class="d-flex align-items-center justify-content-center vh-100">
+  <div class="text-center">
+    <!-- Заголовок с номером ошибки -->
+    <h1 class="display-1 fw-bold">404</h1>
+    <!-- Сообщение об ошибке -->
+    <p class="fs-3"> <span class="text-danger">Упс!</span> Страница не найдена.</p>
+    <!-- Описание ошибки -->
+    <p class="lead">
+      Страница, которую вы ищете, не существует.
+    </p>
+    <!-- Кнопка для возвращения на главную страницу -->
+    <a href="/" class="btn btn-primary">На главную</a>
+  </div>
+</div>
+{% endblock %}

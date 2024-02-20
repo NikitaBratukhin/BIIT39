@@ -1,0 +1,67 @@
+{% extends 'layout.html' %}
+
+{% block ogtitle %}{{ blog.title }}{% endblock %}
+{% block ogdescription %}{{ blog.desc }}{% endblock %}
+{% block ogimage %}{{ blog.thumbnail.url }}{% endblock %}
+
+{% block title %}Мероприятие{% endblock %}
+
+{% block body %}
+{% load static %}
+<div class="container mt-5 mb-5">
+  <div class="row">
+    <h2>
+      {{ blog.title }}
+    </h2>
+  </div>
+  <div class="row">
+    <p>Автор: {{ blog.creator }} | Просмотры: {{ blog.views }} | Обновлено: {{ blog.published_on|timesince }} назад</p>
+  </div>
+  <div class="row mb-3">
+    {% for category in blog.categories.all %}
+      {% if category.is_active %}
+        {% if category.slug %}
+          <div class="col">
+            <a type="button" href="{% url 'get_category' category.slug %}" class="btn btn-primary btn-sm ms-auto">{{ category.category }}</a>
+          </div>
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+  </div>
+  <div class="row">
+    <div class="ratio ratio-16x9">
+      <img src="{{ blog.thumbnail.url }}" class="img-fluid rounded mx-auto d-block" alt="Изображение мероприятия">
+    </div>
+    <p>
+      {{ blog.content|safe }}
+    </p>
+  </div>
+<div class="row mb-3">
+    {% for category in blog.categories.all %}
+        {% if category.is_active %}
+            {% if category.slug %}
+                <div class="col">
+                    <a type="button" href="{% url 'get_category' category.slug %}" class="btn btn-primary btn-sm ms-auto">{{ category.category }}</a>
+                </div>
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+    <!-- Кнопка добавления в закладки - Удалена -->
+    <!-- <div class="col">
+        <button class="btn btn-outline-primary btn-sm ms-auto add-to-bookmarks" data-blog-id="{{ blog.id }}">
+            <i class="bi bi-bookmarks"></i> Добавить в закладки
+        </button>
+    </div> -->
+</div>
+</div>
+
+<!-- Модальное окно поделиться -->
+<div class="modal fade" id="shareModal" tabindex="-1" aria-labelledby="shareModalLabel" aria-hidden="true">
+  <!-- ... остальной код модального окна ... -->
+</div>
+<!-- Подключение библиотеки jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<!-- Подключение скрипта blog.js -->
+<script src="{% static 'js/blogs/blog.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,94 @@
+{% extends 'layout.html' %}
+
+{% block title %}Регистрация - Аккаунты{% endblock %}
+
+{% block body %}
+<div class="container mt-5 mb-5">
+  {% load static %}
+<form method="post" action="{% url 'accounts:register' %}">
+  {% csrf_token %}
+  <h1 class="text-center">
+    Регистрация
+  </h1>
+  <div class="mb-3">
+    <label for="username" class="form-label">
+      Имя пользователя
+    </label>
+    <input type="text" class="form-control" id="username" name="username" placeholder="Имя пользователя" aria-describedby="usernameHelp" required autofocus>
+    <ul class="usernameHelp">
+      <li class="form-text">Должно быть уникальным</li>
+    </ul>
+  </div>
+  <div class="row mb-3">
+    <div class="col-xs-12 col-sm-6">
+      <label for="firstname" class="form-label">
+        Имя
+      </label>
+      <input type="text" id="firstname" class="form-control" placeholder="Имя" name="firstname" required>
+    </div>
+    <div class="col-xs-12 col-sm-6">
+      <label for="lastname" class="form-label">
+        Фамилия
+      </label>
+      <input type="text" id="lastname" class="form-control" placeholder="Фамилия (необязательно)" name="lastname">
+    </div>
+  </div>
+  <div class="mb-3">
+    <label for="email" class="form-label">
+      Электронная почта
+    </label>
+    <input type="email" class="form-control" id="email" name="email" placeholder="Электронная почта" required>
+  </div>
+  <div class="mb-3">
+    <label for="password1" class="form-label">
+      Пароль
+    </label>
+    <input type="password" class="form-control" id="password1" name="password1" placeholder="Пароль" aria-describedby="passwordHelp" required>
+    <ul class="passwordHelp">
+      <li class="form-text">Минимальная длина - 6 символов</li>
+      <li class="form-text">Требуется минимум одна цифра</li>
+      <li class="form-text">Требуется минимум один спецсимвол</li>
+    </ul>
+  </div>
+  <div class="mb-3">
+    <label for="password2" class="form-label">
+      Подтвердите пароль
+    </label>
+    <input type="password" class="form-control" id="password2" name="password2" placeholder="Подтвердите пароль" required>
+  </div>
+  <div class="form-check mb-3">
+    <input class="form-check-input" type="checkbox" value="" id="agreeCheckbox" required>
+    <label class="form-check-label" for="invalidCheck">
+      Соглашаюсь с <a class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#termsModal">
+        условиями и положениями
+      </a> 
+    </label>
+  </div>
+  <button type="submit" class="btn btn-success w-100">Зарегистрироваться</button>
+  <div class="mt-3">
+    <p>Уже есть аккаунт? <a href="{% url 'accounts:login' %}" class="text-decoration-none">Войти</a></p>
+  </div>
+</form>
+</div>
+<div class="modal fade" id="termsModal" tabindex="-1" aria-labelledby="termsModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="termsModalLabel">Условия и положения</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>
+          Регистрируясь, вы соглашаетесь с условиями и положениями нашего веб-сайта. Это включает в себя, но не ограничивается уважением к конфиденциальности других пользователей, воздержанием от размещения неприемлемого контента и соблюдением всех применимых законов и правил.
+          <a href="{% url 'terms_and_conditions' %}" class="text-decoration-none">Подробнее</a>
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+        <button type="button" class="btn btn-primary" onclick="handleAgree()">Согласен</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="{% static 'js/accounts/register.js' %}"></script>
+{% endblock %}

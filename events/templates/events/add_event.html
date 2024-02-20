@@ -1,0 +1,83 @@
+{% load static %}
+{% load i18n %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% trans "Добавить мероприятие" %}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+    <link rel="stylesheet" href="{% static 'css/add_event_styles.css' %}">
+    <style>
+        .datepicker-dropdown {
+            z-index: 1051; /* Ensure datepicker is above modal */
+        }
+    </style>
+</head>
+<body>
+<div class="container mt-5">
+    <h2 class="text-center mb-4">{% trans "Добавить мероприятие" %}</h2>
+    <form method="post" class="add-event-form">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="id_title">{% trans "Название" %}</label>
+            {{ form.title }}
+        </div>
+        <div class="form-group datepicker">
+            <label for="id_date">{% trans "Дата" %}</label>
+            {{ form.date }}
+            <button type="button" class="btn btn-success" id="confirmDate">{% trans "OK" %}</button>
+        </div>
+        <div class="form-group">
+            <label for="id_description">{% trans "Описание" %}</label>
+            {{ form.description }}
+        </div>
+        <div class="form-group">
+            <label for="id_category">{% trans "Категория" %}</label>
+            {{ form.category }}
+        </div>
+        <button type="submit" class="btn btn-primary">{% trans "Добавить событие" %}</button>
+    </form>
+    <a href="{% url 'events:calendar' %}" class="btn btn-info mt-3">{% trans "Вернуться в календарь" %}</a>
+</div>
+
+<!-- Модальное окно для сообщения о статусе -->
+<div class="modal fade" id="statusModal" tabindex="-1" role="dialog" aria-labelledby="statusModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="statusModalLabel">{% trans "Статус мероприятия" %}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        {% for message in messages %}
+          <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('.datepicker').datepicker({
+            format: 'yyyy-mm-dd',
+            autoclose: true // Automatically close the datepicker after selecting a date.
+        });
+
+
+        if ($('.alert').length > 0) {
+            $('#statusModal').modal('show');
+        }
+
+        $('#confirmDate').click(function() {
+
+        });
+    });
+</script>
+</body>
+</html>

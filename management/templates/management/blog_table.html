@@ -1,0 +1,37 @@
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">ID</th>
+      <th scope="col">Заголовок</th>
+      <th scope="col">Описание</th>
+      <th scope="col">Категории</th>
+      <th scope="col">Создано</th>
+      <th scope="col">Опубликовано</th>
+      <th scope="col">Действия</td>
+    </tr>
+  </thead>
+  <tbody class="table-group-divider">
+    {% for blog in blogs %}
+    <tr>
+      <th scope="row">{{ forloop.counter }}</th>
+      <th>{{ blog.id }}</th>
+      <td>{{ blog.title|truncatechars:30 }}</td>
+      <td>{{ blog.desc|truncatechars:50 }}</td>
+      <td>[{{ blog.categories.all|join:", " }}]</td>
+      <td>{{ blog.published_on }}</td>
+      <td>{% if blog.is_published %}Да{% else %}Нет{% endif %}</td>
+      <td>
+        <a class="btn btn-warning" href="{% url 'manage:edit_blog' blog.id %}" role="button">
+          <i class="bi bi-pencil-square"></i>
+          Редактировать
+        </a>
+        <a class="btn btn-danger" href="{% url 'manage:delete_blog' blog.id %}" role="button">
+          <i class="bi bi-trash3"></i>
+          Удалить
+        </a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>

@@ -1,0 +1,88 @@
+/* Основные стили для формы */
+.form-event {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: 40px auto;
+    animation: slideDownFadeIn 0.5s ease-in-out both;
+}
+
+/* Стилизация полей ввода и элементов формы */
+.form-event input[type="text"],
+.form-event input[type="date"],
+.form-event textarea,
+.form-event select {
+    width: 100%;
+    padding: 0.375rem 0.75rem;
+    margin-bottom: 1rem;
+    border-radius: 0.25rem;
+    border: 1px solid #ced4da;
+}
+
+.form-event .form-check-input {
+    margin-top: 0.3rem;
+    margin-left: 0;
+}
+
+/* Кнопка отправки формы */
+.form-event .submit-btn {
+    background-color: #28a745; /* Изменено для разнообразия */
+    color: #ffffff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-event .submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+/* Динамическое появление контейнера описания категории */
+#category-description-container {
+    margin-top: 10px;
+    background-color: #f8f9fa;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,.1);
+    transition: height 0.5s ease, opacity 0.5s ease;
+    overflow: hidden;
+    height: 0;
+    opacity: 0;
+}
+
+#category-description-container.active {
+    height: auto;
+    opacity: 1;
+}
+
+/* Анимация для плавного появления формы */
+@keyframes slideDownFadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+.btn-primary {
+    transition: transform .2s; /* Анимация */
+}
+
+.btn-primary:hover {
+    transform: scale(1.05); /* Увеличение кнопки при наведении */
+}
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+body {
+    animation: fadeIn 1s ease-out;
+}

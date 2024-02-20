@@ -1,0 +1,26 @@
+{% extends 'layout.html' %}
+
+{% block title %}Последние записи{% endblock %}
+
+{% block body %}
+<!-- Основной контент -->
+<div class="container mt-5 mb-5">
+  <!-- Заголовок и описание категории -->
+  <div class="row mb-5">
+    <h2 class="text-center">{{ category.category }}</h2>
+    <p>{{ category.desc }}</p>
+  </div>
+  <!-- Сетка карточек блогов в выбранной категории -->
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for blog in category.blogs.all %}
+      {% if blog.is_active %}
+        <!-- Подключение шаблона карточки с передачей данных блога -->
+        {% include "card.html" with blog=blog %}
+      {% endif %}
+    {% empty %}
+      <!-- Уведомление, если в категории нет активных блогов -->
+      <p class="text-center">Мероприятия не найдены !!!</p>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

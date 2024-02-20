@@ -1,0 +1,21 @@
+{% extends 'layout.html' %}
+
+{% block title %}Тренды{% endblock %}
+<!-- Заголовок страницы, отображающий текущий раздел как "Тренды" -->
+
+{% block body %}
+<div class="container mt-5 mb-5">
+  <div class="row">
+    <h1 class="text-center mt-3 mb-3">Популярные Мероприятия</h1>
+    <!-- Заголовок блока, отображающий текущий раздел как "Популярные блоги" -->
+  </div>
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for blog in blogs %}
+      {% include 'card.html' with blog=blog %}
+      <!-- Включение шаблона карточки для каждого блога в списке популярных блогов -->
+    {% endfor %}
+  </div>
+  {% include 'pagination.html' with blogs=blogs %}
+  <!-- Включение шаблона пагинации для управления страницами списка популярных блогов -->
+</div>
+{% endblock %}

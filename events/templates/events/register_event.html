@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Регистрация на мероприятие</title>
+    <link rel="stylesheet" href="{% static 'css/register_event.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Регистрация на мероприятие: {{ event.title }}</h1>
+        <form class="form-group" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button class="btn" type="submit">Зарегистрироваться на мероприятие</button>
+        </form>
+    </div>
+</body>
+<script>
+    if (document.getElementById("registration-success-message")) {
+        let countdown = 6;
+        const intervalId = setInterval(() => {
+            document.getElementById("registration-success-message").textContent = `Вы будете перенаправлены на календарь через ${countdown} секунд.`;
+            countdown--;
+            if (countdown < 0) {
+                clearInterval(intervalId);
+                window.location.href = "{% url 'events:calendar' %}";
+            }
+        }, 1000);
+    }
+
+</script>
+</html>

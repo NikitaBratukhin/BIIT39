@@ -1,0 +1,23 @@
+{% extends 'layout.html' %}
+
+{% block title %}Последние{% endblock %}
+
+{% block body %}
+<!-- Основной контент -->
+<div class="container mt-5 mb-5">
+  <!-- Заголовок страницы -->
+  <div class="row">
+    <h1 class="text-center mt-3 mb-3">
+      Последние Мероприятия
+    </h1>
+  </div>
+  <!-- Сетка карточек блогов -->
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for blog in blogs %}
+      {% include 'card.html' with blog=blog %}
+    {% endfor %}
+  </div>
+  <!-- Пагинация -->
+  {% include 'pagination.html' with blogs=blogs %}
+</div>
+{% endblock %}
